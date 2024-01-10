@@ -1,0 +1,33 @@
+.diagram-container {
+  background: #222;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 200px;
+  font-family: sans-serif;
+
+}
+
+.diagram-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.diagram-content-text {
+  color: white;
+}
+
+.diagram-content-type {
+  color: #999;
+}
+
+
+/* Handle OverWrite */
+.react-flow__handle-left {
+  left: -15px;
+}
+
+.react-flow__handle-right {
+  right: -15px;
+}
