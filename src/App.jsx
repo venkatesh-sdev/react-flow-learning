@@ -1,20 +1,28 @@
-// import React, { useState, useCallback } from 'react';
+
+// React Flow 
 import ReactFlow, {
-    // MiniMap,
-    // Controls,
+    MiniMap,
+    Controls,
     Background, addEdge,
 } from 'reactflow';
-
 import 'reactflow/dist/style.css';
+
+// Components
 import Table from './components/Table';
 import TableList from './components/TableList';
 
-const nodeTypes = { Table: Table };
-
+// Redux and Reducers
 import { useDispatch, useSelector } from 'react-redux';
-import { onConnect, onEdgesChange, onNodesChange, selectEdges, selectNodes } from './context/flowReducer';
+import {
+    onConnect,
+    onEdgesChange,
+    onNodesChange,
+    selectEdges,
+    selectNodes
+} from './context/flowReducer';
 
 
+const nodeTypes = { Table: Table };
 
 export default function App() {
     const dispatch = useDispatch();
@@ -33,8 +41,8 @@ export default function App() {
                     nodeTypes={nodeTypes}
                     fitView
                 >
-                    {/* <Controls className='bg-gray-700' />
-                    <MiniMap className='bg-transparent' /> */}
+                    <Controls className='bg-gray-700' />
+                    {/* <MiniMap className='bg-transparent ' /> */}
                     <Background className='bg-[#1B1E25]' variant="dots" gap={24} size={1} />
                 </ReactFlow>
             </div>

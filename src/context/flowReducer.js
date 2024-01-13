@@ -34,7 +34,24 @@ const FlowSlice = createSlice(
                     return newNode;
                 })
             },
-
+            editField: (state, action) => {
+                state.nodes = state.nodes.map((node) => {
+                    if (node.id !== action.payload?.tableId) return node;
+                    const updatedTableModel = node.data.tabelModel.map(field => {
+                        if (field.id !== action.payload?.fieldId) return field
+                        const { name, type, constraints } = action.payload?.data;
+                        return { ...field, name, type, constraints }
+                    })
+                    return ({ ...node, data: { ...node.data, tabelModel: updatedTableModel } })
+                })
+            },
+            deleteField: (state, action) => {
+                state.nodes = state.nodes.map((node) => {
+                    if (node.id !== action.payload?.tableId) return node;
+                    const updatedTableModel = node.data.tabelModel.filter(field => field.id !== action.payload?.fieldId)
+                    return ({ ...node, data: { ...node.data, tabelModel: updatedTableModel } })
+                })
+            },
             addToEdge: (state, action) => {
                 state.edges = [...state.edges, action.payload];
             },
@@ -64,7 +81,9 @@ export const {
     onEdgesChange,
     onNodesChange,
     addTable,
-    addToField
+    addToField,
+    deleteField,
+    editField
 } = FlowSlice.actions;
 
 export const selectNodes = (state) => state.flow.nodes;

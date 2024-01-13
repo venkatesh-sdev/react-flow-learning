@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 
 export const createNodeModel = (name, positionX) => {
-
     const id = nanoid(20)
     return ({
         id,
@@ -9,13 +8,18 @@ export const createNodeModel = (name, positionX) => {
         position: { x: positionX, y: 100 },
         data: {
             tableName: name,
-            tabelModel: [],
+            tabelModel: [
+                createTableFieldModel({ name: 'dummy', type: 'dummy', constraints: [] }),
+                createTableFieldModel({ name: 'dummy', type: 'dummy', constraints: [] }),
+                createTableFieldModel({ name: 'dummy', type: 'dummy', constraints: [] }),
+            ],
             id
         }
     })
 };
 
-export const createTableFieldModel = ( data ) => ({
+export const createTableFieldModel = (data) => ({
+    id: nanoid(20),
     name: data.name,
     type: data.type,
     constraints: data.constraints,
