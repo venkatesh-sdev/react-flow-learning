@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import initialNodes from "../data/nodes";
 import initialEdges from "../data/edges";
 import { addEdge, applyEdgeChanges, applyNodeChanges } from "reactflow";
+import { createTableFieldModel } from "../constants/models";
 
 const initialState = {
     nodes: initialNodes,
@@ -17,9 +18,21 @@ const FlowSlice = createSlice(
 
             addToNode: (state, action) => {
                 state.nodes = [...state.nodes, action.payload];
+                state.positionX = state.nodes[state.nodes.length - 1].position.x + 350;
             },
             removeFromNode: (state, action) => {
                 state.nodes = state.nodes.filter(node => node.id !== action.payload);
+                state.positionX = state.positionX - 350
+            },
+
+            addToField: (state, action) => {
+                state.nodes = state.nodes.map((node) => {
+                    if (node.id !== action.payload.id) return node;
+                    const newTableModel = [...node.data.tabelModel, createTableFieldModel(action.payload.data)];
+                    const newNode = { ...node, data: { ...node.data, tabelModel: newTableModel } };
+
+                    return newNode;
+                })
             },
 
             addToEdge: (state, action) => {
@@ -29,10 +42,6 @@ const FlowSlice = createSlice(
                 state.edges = state.edges.filter(edge => edge.id !== action.payload);
             },
 
-            updatePositioX: (state, action) => {
-                state.positionX = state.nodes[state.nodes.length - 1].position.x + 350;
-            },
-
             onNodesChange: (state, action) => {
                 state.nodes = applyNodeChanges(action.payload, state.nodes);
             },
@@ -40,7 +49,7 @@ const FlowSlice = createSlice(
                 state.edges = applyEdgeChanges(action.payload, state.edges);
             },
             onConnect: (state, action) => {
-                state.edges = addEdge(action.payload, state.edges);
+                state.edges = addEdge({ ...action.payload, animated: true, style: { strokeWidth: 2 } }, state.edges);
             },
         }
     }
@@ -54,11 +63,11 @@ export const {
     onConnect,
     onEdgesChange,
     onNodesChange,
-    updatePositioX
+    addTable,
+    addToField
 } = FlowSlice.actions;
 
 export const selectNodes = (state) => state.flow.nodes;
 export const selectEdges = (state) => state.flow.edges;
-export const selectPositionX = (state) => state.flow.positionX;
 
 export default FlowSlice.reducer;

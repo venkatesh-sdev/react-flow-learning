@@ -1,8 +1,8 @@
 export default [
     {
-        id: 'users', 
-        type: 'Table', 
-        position: { x: 0, y: 100 }, 
+        id: 'users',
+        type: 'Table',
+        position: { x: 0, y: 100 },
         data: {
             tableName: 'User',
             tabelModel: [
@@ -31,7 +31,8 @@ export default [
                     isSource: false,
                     isTarget: false,
                 }
-            ]
+            ],
+            id: 'users',
         }
     },
     {
@@ -39,6 +40,7 @@ export default [
         type: 'Table',
         position: { x: 350, y: 100 },
         data: {
+            id: 'follows',
             tableName: 'Follows',
             tabelModel: [
                 {
@@ -80,16 +82,9 @@ export default [
         type: 'Table',
         position: { x: 700, y: 100 },
         data: {
+            id: '-user',
             tableName: 'Following',
             tabelModel: [
-                {
-                    name: 'user_id', type: 'integer',
-                    constraints: ['primary', 'notnull'],
-                    targetid: 'tar4',
-                    sourceid: 'sor4',
-                    isSource: false,
-                    isTarget: true,
-                },
                 {
                     name: 'user_id', type: 'integer',
                     constraints: ['primary', 'notnull'],
@@ -104,7 +99,7 @@ export default [
                     targetid: 'tar5',
                     sourceid: 'sor5',
                     isSource: false,
-                    isTarget: false,
+                    isTarget: true,
                 }, {
                     name: 'user_age', type: 'varchar',
                     constraints: ['notnull'],

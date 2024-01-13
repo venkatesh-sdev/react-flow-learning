@@ -2,7 +2,7 @@
 import ReactFlow, {
     // MiniMap,
     // Controls,
-    Background,
+    Background, addEdge,
 } from 'reactflow';
 
 import 'reactflow/dist/style.css';
@@ -15,8 +15,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { onConnect, onEdgesChange, onNodesChange, selectEdges, selectNodes } from './context/flowReducer';
 
 
+
 export default function App() {
     const dispatch = useDispatch();
+
 
     return (
         <div className='flex w-screen '>
@@ -28,9 +30,8 @@ export default function App() {
                     onNodesChange={(e) => dispatch(onNodesChange(e))}
                     onEdgesChange={(e) => dispatch(onEdgesChange(e))}
                     onConnect={(e) => dispatch(onConnect(e))}
-
                     nodeTypes={nodeTypes}
-                    // fitView
+                    fitView
                 >
                     {/* <Controls className='bg-gray-700' />
                     <MiniMap className='bg-transparent' /> */}

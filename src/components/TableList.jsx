@@ -8,12 +8,13 @@ import { createNodeModel } from '../constants/models';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addToNode, removeFromNode, selectNodes, selectPositionX, updatePositioX } from '../context/flowReducer';
-import { selectShowCreateField, selectShowCreateTable, toggleCreateTable } from '../context/publicReducer';
+import { addToNode, removeFromNode, selectNodes } from '../context/flowReducer';
+import { selectShowCreateField, selectShowUpdateField, selectShowCreateTable, toggleCreateTable } from '../context/publicReducer';
 
 // Modals
 import CreateTableModal from './CreateTableModal';
 import CreateFieldModal from './CreateFieldModal';
+import UpdateFieldModal from './UpdateFieldModal';
 
 const TableList = () => {
 
@@ -22,6 +23,7 @@ const TableList = () => {
     const nodes = useSelector(selectNodes);
     const showCreateTableModal = useSelector(selectShowCreateTable);
     const showCreateFieldModal = useSelector(selectShowCreateField);
+    const showUpdateFieldModal = useSelector(selectShowUpdateField);
 
     // Functions
     const handleTableDelete = (nodeId) => {
@@ -55,6 +57,9 @@ const TableList = () => {
             }
             {
                 showCreateFieldModal && <CreateFieldModal />
+            }
+            {
+                showUpdateFieldModal && <UpdateFieldModal />
             }
         </>
     )

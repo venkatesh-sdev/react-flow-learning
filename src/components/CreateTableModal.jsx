@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useRef } from 'react'
 
 // Icons
 import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai'
@@ -7,19 +7,23 @@ import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai'
 import { createNodeModel } from '../constants/models';
 
 // Redux 
-import { useDispatch } from 'react-redux'
-import { toggleCreateField, toggleCreateTable } from '../context/publicReducer';
-import { addToNode, updatePositioX } from '../context/flowReducer';
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleCreateTable } from '../context/publicReducer';
+import { addToNode } from '../context/flowReducer';
 
 const CreateTableModal = () => {
 
   // Redux
   const dispatch = useDispatch();
-  const positionX = useSelector(selectPositionX)
 
 
   // Ref
   const tableNameRef = useRef();
+
+  // Effects
+  useEffect(() => {
+    tableNameRef.current.focus();
+  }, [])
 
   // Functions
   const handleAddTable = () => {
@@ -27,7 +31,6 @@ const CreateTableModal = () => {
     const nodeModel = createNodeModel(name, positionX);
     dispatch(addToNode(nodeModel))
     dispatch(toggleCreateTable())
-    dispatch(updatePositioX())
   }
 
 
@@ -47,16 +50,16 @@ const CreateTableModal = () => {
             type="text"
             id='tableName'
             ref={tableNameRef}
-            autoComplete='false'
+            autoComplete='off'
             placeholder='Enter Table Name'
             className='bg-gray-800 p-2 placeholder:tracking-[2px] placeholder:uppercase'
           />
         </div>
-        <button
+        {/* <button
           onClick={() => dispatch(toggleCreateField())}
           className='bg-gray-800 flex-center p-2 mt-2  w-full gap-2'>
           <AiOutlinePlus /> <p className='text-md uppercase tracking-[2px]'>Add Field</p>
-        </button>
+        </button> */}
         <button onClick={handleAddTable} className='w-full uppercase tracking-[2px] p-2 mt-4 bg-blue-700'>
           save
         </button>

@@ -1,3 +1,5 @@
+import { MarkerType } from "reactflow";
+
 export default [
     {
         id: 'edge01',
@@ -8,6 +10,7 @@ export default [
         animated: true,
         type: 'simplebezier',
         style: { strokeWidth: 2 },
+        
     },
     {
         id: 'edge02',
