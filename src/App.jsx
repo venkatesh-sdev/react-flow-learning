@@ -1,68 +1,42 @@
-import React, { useState, useCallback } from 'react';
+// import React, { useState, useCallback } from 'react';
 import ReactFlow, {
-    MiniMap,
-    Controls,
+    // MiniMap,
+    // Controls,
     Background,
-    addEdge,
-    applyNodeChanges,
-    applyEdgeChanges,
 } from 'reactflow';
 
 import 'reactflow/dist/style.css';
-import Diagram from './Diagram';
+import Table from './components/Table';
+import TableList from './components/TableList';
 
-const nodeTypes = { diagram: Diagram };
+const nodeTypes = { Table: Table };
 
-const initialNodes = [
-    {
-        id: '1', type: 'diagram', position: { x: 200, y: 100 }, data: {
-            handleType: 'source',
-            sourceId1: 'id01',
-            sourceId2: 'id02',
-            handlePosition: 'right'
-        }
-    },
-    {
-        id: '2', type: 'diagram', position: { x: 500, y: 100 }, data: {
-            handleType: 'target',
-            handlePosition: 'left'
-        }
-    },
-];
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2', sourceHandle: 'id01' },
-{ id: 'e1-3', source: '1', target: '2', sourceHandle: 'id02' }];
+import { useDispatch, useSelector } from 'react-redux';
+import { onConnect, onEdgesChange, onNodesChange, selectEdges, selectNodes } from './context/flowReducer';
+
 
 export default function App() {
-    const [nodes, setNodes] = useState(initialNodes);
-    const [edges, setEdges] = useState(initialEdges);
-
-    const onNodesChange = useCallback(
-        (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-        [setNodes]
-    );
-    const onEdgesChange = useCallback(
-        (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-        [setEdges]
-    );
-    const onConnect = useCallback(
-        (connection) => setEdges((eds) => addEdge(connection, eds)),
-        [setEdges]
-    );
+    const dispatch = useDispatch();
 
     return (
-        <div style={{ width: '100vw', height: '100vh' }}>
-            <ReactFlow
-                nodes={nodes}
-                edges={edges}
-                onNodesChange={onNodesChange}
-                onEdgesChange={onEdgesChange}
-                onConnect={onConnect}
-                nodeTypes={nodeTypes}
-            >
-                {/* <Controls /> */}
-                {/* <MiniMap /> */}
-                {/* <Background variant="dots" gap={12} size={1} /> */}
-            </ReactFlow>
+        <div className='flex w-screen '>
+            <TableList />
+            <div className='w-[75vw] h-screen'>
+                <ReactFlow
+                    nodes={useSelector(selectNodes)}
+                    edges={useSelector(selectEdges)}
+                    onNodesChange={(e) => dispatch(onNodesChange(e))}
+                    onEdgesChange={(e) => dispatch(onEdgesChange(e))}
+                    onConnect={(e) => dispatch(onConnect(e))}
+
+                    nodeTypes={nodeTypes}
+                    // fitView
+                >
+                    {/* <Controls className='bg-gray-700' />
+                    <MiniMap className='bg-transparent' /> */}
+                    <Background className='bg-[#1B1E25]' variant="dots" gap={24} size={1} />
+                </ReactFlow>
+            </div>
         </div>
     );
 }

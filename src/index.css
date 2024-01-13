@@ -1,33 +1,51 @@
-.diagram-container {
-  background: #222;
-  padding: 10px;
-  border-radius: 10px;
-  min-width: 200px;
-  font-family: sans-serif;
+@tailwind components;
+@tailwind base;
+@tailwind utilities;
 
+
+/* Own Class */
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.diagram-content {
+.flex-center {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  position: relative;
-}
-
-.diagram-content-text {
-  color: white;
-}
-
-.diagram-content-type {
-  color: #999;
 }
 
 
-/* Handle OverWrite */
+
+/*  OverWrite */
+
+/* handle Positions */
 .react-flow__handle-left {
   left: -15px;
 }
 
 .react-flow__handle-right {
   right: -15px;
+}
+
+/* Handle Shape */
+.react-flow__handle {
+  position: absolute;
+  pointer-events: none;
+  min-width: 5px;
+  min-height: 5px;
+  width: 10px;
+  height: 10px;
+  background: #0d0d0f;
+  border: 1px solid white;
+  border-radius: 0%;
+}
+
+
+/* Removing WaterMark */
+.react-flow__attribution {
+  display: none;
 }

@@ -1,13 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import { createRoot } from 'react-dom/client';
 
-// all styles for this example app are in the index.css file to keep it as simple as possible
+import App from './App';
 import './index.css';
 
-// we need to wrap our app in the ReactFlowProvider to be able to use the React Flow hooks in our App component
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// State Management
+import { Provider } from 'react-redux';
+import store from './context/store';
+
+
+createRoot(document.querySelector('#root'))
+  .render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
