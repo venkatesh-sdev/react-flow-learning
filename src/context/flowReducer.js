@@ -69,5 +69,6 @@ export const {
 
 export const selectNodes = (state) => state.flow.nodes;
 export const selectEdges = (state) => state.flow.edges;
+export const selectPositionX = (state) => state.flow.positionX;
 
 export default FlowSlice.reducer;

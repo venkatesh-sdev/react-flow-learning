@@ -9,12 +9,13 @@ import { createNodeModel } from '../constants/models';
 // Redux 
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleCreateTable } from '../context/publicReducer';
-import { addToNode } from '../context/flowReducer';
+import { addToNode, selectPositionX } from '../context/flowReducer';
 
 const CreateTableModal = () => {
 
   // Redux
   const dispatch = useDispatch();
+  const positionX = useSelector(selectPositionX)
 
 
   // Ref
