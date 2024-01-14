@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import { MarkerType } from "reactflow";
 
 export const createNodeModel = (name, positionX) => {
     const id = nanoid(20)
@@ -8,7 +9,7 @@ export const createNodeModel = (name, positionX) => {
         position: { x: positionX, y: 100 },
         data: {
             tableName: name,
-            tabelModel: [
+            tableModel: [
                 createTableFieldModel({ name: 'dummy', type: 'dummy', constraints: [] }),
                 createTableFieldModel({ name: 'dummy', type: 'dummy', constraints: [] }),
                 createTableFieldModel({ name: 'dummy', type: 'dummy', constraints: [] }),
@@ -28,3 +29,19 @@ export const createTableFieldModel = (data) => ({
     isSource: false,
     isTarget: false,
 });
+
+export const edgeModel = (source, sourceHandle, target, targetHandle) => {
+    return ({
+        id: nanoid(20),
+        source,
+        sourceHandle,
+        target,
+        targetHandle,
+        animated: true,
+        type: 'simplebezier',
+        style: { strokeWidth: 2 },
+        markerEnd: {
+            type: MarkerType.ArrowClosed,
+        },
+    })
+}

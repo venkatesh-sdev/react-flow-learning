@@ -39,9 +39,8 @@
   min-height: 5px;
   width: 10px;
   height: 10px;
-  background: #0d0d0f;
-  border: 1px solid white;
   border-radius: 0%;
+  cursor: default;
 }
 
 

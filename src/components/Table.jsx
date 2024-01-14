@@ -11,7 +11,6 @@ import { toggleCreateField, toggleUpdateField } from '../context/publicReducer'
 
 
 const Table = memo(({ data }) => {
-
     // Redux
     const dispatch = useDispatch();
 
@@ -28,11 +27,13 @@ const Table = memo(({ data }) => {
             </div>
             {/* List Of Fields */}
             {
-                data?.tabelModel?.map((model, index) => {
+                data?.tableModel?.map((model, index) => {
                     return (
                         <div onClick={() => handleUpdateField(model.id, model)} key={index} className='flex justify-between gap-2 items-center border-transparent border border-b-white border-opacity-10 hover:bg-gray-800 bg-gray-700 px-4 py-2 relative'>
-                            {model.isTarget && <Handle
-                                type='target' position='left' id={model.targetid} />}
+                            <Handle
+                                type='target' position='left' id={model.targetid}
+                                className={`${model.isTarget ? "bg-black border" : "bg-transparent border-none"}`}
+                            />
                             <div className=''>
                                 <p className='text-md'>{model.name}</p>
                             </div>
@@ -40,7 +41,11 @@ const Table = memo(({ data }) => {
                                 <p className='text-md'>{model.type}</p>
                             </div>
 
-                            {model.isSource && <Handle type='source' position='right' id={model.sourceid} />}
+                            <Handle type='source'
+                                position='right'
+                                id={model.sourceid}
+                                className={`${model.isSource ? "bg-black border" : "bg-transparent border-none"}`}
+                            />
                         </div>
                     )
                 })

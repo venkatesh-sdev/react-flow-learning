@@ -25,6 +25,8 @@ import {
     EditFieldModal,
     UpdateFieldModal,
 } from './modals'
+import { useEffect } from "react";
+import { addEdge } from "reactflow";
 
 const TableList = () => {
 
@@ -36,6 +38,12 @@ const TableList = () => {
     const showUpdateFieldModal = useSelector(selectShowUpdateField);
     const showEditFieldModal = useSelector(selectShowEditField);
     const showAddReferenceModal = useSelector(selectShowAddReference);
+
+
+    // Effects
+    // useEffect(() => {
+    //     dispatch(addEdge())
+    // }, [nodes])
 
     // Functions
     const handleTableDelete = (nodeId) => {
@@ -55,20 +63,20 @@ const TableList = () => {
     return (
         <>
             <div className='max-w-[25vw] min-w-[25vw] w-full h-screen bg-[#101217]'>
-                {/* Add Tables and Title */}
+                {/* Add tables and Title */}
                 <div className='flex items-center justify-between px-2 my-2'>
-                    <h1 className='text-white text-xl tracking-[5px]'>TABLES</h1>
+                    <h1 className='text-white text-xl tracking-[5px]'>tables</h1>
                     <button onClick={() => dispatch(toggleCreateTable())} className='flex items-center gap-2 p-2 bg-gray-800 text-white'>
                         <AiOutlinePlus />
                         <p className='text-md tracking-[3px]'>ADDTABLE</p>
                     </button>
                 </div>
-                {/* List of Tables */}
+                {/* List of tables */}
                 <div className='px-5 mt-6'>
                     {nodes.map((node) => <div key={node.id} className='flex mt-2 justify-between items-center p-2 text-white w-full bg-gray-800'>
                         <div className='flex flex-col gap-2'>
                             <p>{node.data.tableName}</p>
-                            <p>Table Fields Count : {node.data.tabelModel.length}</p>
+                            <p>Table Fields Count : {node.data.tableModel.length}</p>
                         </div>
                         <button onClick={() => handleTableDelete(node.id)} className='bg-red-600 p-2 text-xs tracking-[3px]'>
                             DELETE

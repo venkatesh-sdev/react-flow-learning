@@ -30,13 +30,23 @@ const PublicSlice = createSlice({
             state.table = action.payload?.table || {};
             state.tableId = action.payload?.tableId || '';
             state.fieldId = action.payload?.fieldId || '';
-            console.log(action.payload)
         },
         toggleEditField: (state, action) => {
             state.showEditField = !state.showEditField
         },
         toggleAddReference: (state, action) => {
             state.showAddReference = !state.showAddReference
+        },
+        toggleCloseAll: (state, action) => {
+            state.showCreateTable = false;
+            state.showCreateField = false;
+            state.showUpdateField = false;
+            state.showEditField = false;
+            state.showAddReference = false;
+            state.tableId = '';
+            state.fieldId = '';
+            state.table = {};
+            state.field = {}
         }
     }
 })
@@ -46,7 +56,8 @@ export const {
     toggleCreateField,
     toggleUpdateField,
     toggleAddReference,
-    toggleEditField
+    toggleEditField,
+    toggleCloseAll
 } = PublicSlice.actions;
 
 export const selectShowCreateTable = (state) => state.public.showCreateTable;

@@ -4,12 +4,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // Reducers
-import { selectField, selectFieldId, selectTableId, toggleEditField } from '../../context/publicReducer';
+import { selectField, selectFieldId, selectTableId, toggleCloseAll, toggleEditField } from '../../context/publicReducer';
 import { editField } from '../../context/flowReducer';
 
 
 // Icons
-import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
 
 
 const EditFieldModal = () => {
@@ -48,10 +48,17 @@ const EditFieldModal = () => {
             <div className='bg-gray-900 w-[400px] h-[400px] py-5 px-2'>
                 <div className='flex justify-between items-center'>
                     <h1 className='text-xl font-medium tracking-[5px] uppercase'>Edit TABLE</h1>
-                    <button
-                        onClick={() => dispatch(toggleEditField())}
-                        className='hover:bg-gray-700 p-1'
-                    ><AiOutlineClose size={20} /></button>
+                    <div className='flex gap-2'>
+                        <button
+                            onClick={() => dispatch(toggleEditField())}
+                            className='hover:bg-gray-700 p-1'
+                        ><AiOutlineArrowLeft size={20} /></button>
+
+                        <button
+                            onClick={() => dispatch(toggleCloseAll())}
+                            className='hover:bg-gray-700 p-1'
+                        ><AiOutlineClose size={20} /></button>
+                    </div>
                 </div>
                 <div className='flex flex-col gap-2 mt-5'>
                     <label htmlFor="fieldName" className='text-md font-medium uppercase tracking-[2px]'>Field Name</label>
